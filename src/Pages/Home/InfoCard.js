@@ -1,10 +1,10 @@
 import React from 'react';
 
 
-const InfoCard = ({ img, cardTitle, bgClass }) => {
+const InfoCard = ({ img, cardTitle, bgclassName }) => {
     return (
-        <div className={`card lg:card-side bg-accent shadow-xl my-10 ${bgClass}`}>
-            <figure className='pl-5'>
+        <div className={`card lg:card-side bg-accent shadow-xl my-10 ${bgclassName}`}>
+            <figure className='pl-5 pt-5'>
                 <img src={img} alt="Album" />
             </figure>
             <div className="card-body">
