@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import chair from '../../assets/images/chair.png'
+import bgChair from "../../assets/images/bg.png"
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import { format } from 'date-fns';
 
-const AppointmentBanner = () => {
-    const [selected, onSelect] = useState(new Date());
+const AppointmentBanner = ({ selected, onSelect }) => {
+
     let footer = <p>Please pick a day.</p>;
     if (selected) {
         footer = <p>You picked {format(selected, 'PP')}.</p>;
     }
     return (
-        <div className="hero min-h-screen">
+        <div style={{
+            background: `url${bgChair}`,
+            backgroundSize: "cover"
+        }} className="hero min-h-screen">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <img src={chair} alt="chair" className="max-w-sm rounded-lg shadow-2xl" />
                 <div>
