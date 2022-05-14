@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import chair from '../../assets/images/chair.png'
-import bgChair from "../../assets/images/bg.png"
+import bg from "../../assets/images/bg.png"
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import { format } from 'date-fns';
@@ -13,9 +13,9 @@ const AppointmentBanner = ({ selected, onSelect }) => {
     }
     return (
         <div style={{
-            background: `url${bgChair}`,
-            backgroundSize: "cover"
-        }} className="hero min-h-screen">
+            background: `url(${bg})`,
+            backgroundSize: 'cover'
+        }} className="hero min-h-screen mb-14">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <img src={chair} alt="chair" className="max-w-sm rounded-lg shadow-2xl" />
                 <div>
@@ -27,9 +27,7 @@ const AppointmentBanner = ({ selected, onSelect }) => {
                     />
 
                 </div>
-
             </div>
-
         </div>
     );
 };
