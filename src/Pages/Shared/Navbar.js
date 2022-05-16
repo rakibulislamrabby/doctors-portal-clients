@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import auth from '../../firebase_init';
 
 const Navbar = () => {
-    const [user, loading, error] = useAuthState(auth);
+    const [user] = useAuthState(auth);
     const logout = () => {
         signOut(auth);
     };
@@ -15,7 +15,10 @@ const Navbar = () => {
         <li><Link to="/review">Review</Link></li>
         <li><Link to="/contact">Contact</Link></li>
         <li><Link to="/about">About</Link></li>
-        <li>{user ? <button onClick={logout} className="btn btn-ghost pt-4">Sign Up</button> : <Link to="/login">Login</Link>}</li>
+        {
+            user && <li><Link to="/dashboard">Dashboard</Link></li>
+        }
+        <li>{user ? <button onClick={logout} className="btn btn-ghost mr-10">Sign Up</button> : <Link to="/login">Login</Link>}</li>
 
     </>
     return (
@@ -33,7 +36,7 @@ const Navbar = () => {
                 </div>
                 <a className="btn btn-ghost  text-xl ml-10">Doctors Portal</a>
             </div>
-            <div className="navbar-center hidden lg:flex">
+            <div className="navbar-end hidden lg:flex">
                 <ul className="menu menu-horizontal  ">
                     {menuItems}
                 </ul>
@@ -42,6 +45,12 @@ const Navbar = () => {
                         <img src="https://api.lorem.space/image/face?hash=28212" />
                     </div>
                 </div>
+            </div>
+            <div className="navbar-end lg:hidden">
+                <label for="my-drawer-2" tabIndex="1" className="btn btn-ghost lg:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                </label>
+
             </div>
         </div>
     );

@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import auth from '../../firebase_init';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import Loading from '../Shared/Loading';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { async } from '@firebase/util';
+import { toast } from 'react-toastify';
 
 const Login = () => {
-
+    const [email, setEmail] = useState("");
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
-    // const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
+    const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
     const navigate = useNavigate();
     const location = useLocation();
     let from = location.state?.from?.pathname || "/";
@@ -40,13 +41,11 @@ const Login = () => {
         signInError = <p className='text-red-500'><small>{error?.message || gError?.message}</small></p>
     }
 
-    // const resetPassword = async (data) => {
-    //     const email = data.target.name.value;
-    //     console.log("reset", email);
-    //     //    await sendPasswordResetEmail();
-    //     //     alert('Sent email');
+    const resetPassword = async () => {
+        await sendPasswordResetEmail(email);
+        toast('Sent email');
 
-    // }
+    }
     return (
         <div className='flex h-screen justify-center items-center mb-28'>
             <div className="card w-96 bg-base-100 shadow-xl">
@@ -70,7 +69,7 @@ const Login = () => {
                                     }
 
                                 })}
-                                type="email" placeholder="You email"
+                                type="email" onBlur={e => setEmail(e.target.value)} placeholder="You email"
                                 className="input input-bordered input-secondary w-full max-w-xs" />
                             <label className="label">
                                 {errors.email?.type === 'required' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
@@ -102,7 +101,7 @@ const Login = () => {
                             </label>
                         </div>
                         {signInError}
-                        <p className='pb-6'>Forgate Password? <button className='text-secondary'>Reset password</button></p>
+                        <p className='pb-6'>Forgate Password? <button onClick={resetPassword} className='text-secondary'>Reset password</button></p>
                         <input className='btn w-full  max-w-xs text-white' type="submit" value="Login" />
                     </form>
                     <p>New to Doctor's Portal? <Link className='text-secondary' to={"/signup"}>Create new account</Link></p>
