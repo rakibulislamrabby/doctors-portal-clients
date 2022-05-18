@@ -6,6 +6,7 @@ import Loading from '../Shared/Loading';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { async } from '@firebase/util';
 import { toast } from 'react-toastify';
+import useToken from '../../hooks/useToken';
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -21,11 +22,13 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+
+    const [token] = useToken(user || gUser)
     useEffect(() => {
-        if (user || gUser) {
+        if (token) {
             navigate(from, { replace: true });
         }
-    }, [user, gUser, from, navigate])
+    }, [token, from, navigate])
 
     const onSubmit = data => {
         console.log(data);
@@ -42,8 +45,13 @@ const Login = () => {
     }
 
     const resetPassword = async () => {
-        await sendPasswordResetEmail(email);
-        toast('Sent email');
+        if (email) {
+            await sendPasswordResetEmail(email);
+            toast('Sent email');
+        }
+        else {
+            toast.error("Please enter your email")
+        }
 
     }
     return (
