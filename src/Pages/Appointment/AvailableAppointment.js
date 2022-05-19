@@ -13,14 +13,14 @@ const AvailableAppointment = ({ date }) => {
     // console.log(formattedDate);
 
     //fetching use react query
-    const { data: services, loading, refetch } = useQuery(["available", formattedDate], () => fetch(`http://localhost:5000/available?date=${formattedDate}`).then(res => res.json()));
+    const { data: services, loading, refetch } = useQuery(["available", formattedDate], () => fetch(`https://aqueous-fjord-98916.herokuapp.com/available?date=${formattedDate}`).then(res => res.json()));
 
     if (loading) {
         return <Loading></Loading>
     }
 
     // useEffect(() => {
-    //     fetch(`http://localhost:5000/available?date=${formattedDate}`)
+    //     fetch(`https://aqueous-fjord-98916.herokuapp.com/available?date=${formattedDate}`)
     //         .then(res => res.json())
     //         .then(data => setServices(data))
     // }, [formattedDate]);

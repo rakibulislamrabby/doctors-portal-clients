@@ -21,12 +21,17 @@ const SignUp = () => {
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({ displayName: data.name });
         console.log('update one');
-
+        console.log(gUser);
     }
 
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
     const [token] = useToken(user || gUser)
+    if (token) {
+        console.log(token);
+        navigate("/home");
+
+    }
     let signInError;
     if (loading || gLoading || updating) {
         return <Loading></Loading>
@@ -35,11 +40,7 @@ const SignUp = () => {
     if (error || gError || updateError) {
         signInError = <p className='text-red-500'><small>{error?.message || gError?.message}</small></p>
     }
-    if (token) {
-        console.log(token);
-        navigate("/home");
 
-    }
     return (
         <div className='flex h-screen justify-center items-center pt-10 mb-20'>
             <div className="card w-96 bg-base-100 shadow-xl">
