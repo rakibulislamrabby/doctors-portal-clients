@@ -19,16 +19,6 @@ const AvailableAppointment = ({ date }) => {
         return <Loading></Loading>
     }
 
-    // useEffect(() => {
-    //     fetch(`https://aqueous-fjord-98916.herokuapp.com/available?date=${formattedDate}`)
-    //         .then(res => res.json())
-    //         .then(data => setServices(data))
-    // }, [formattedDate]);
-
-    // let footer;
-    // if (selected) {
-    //     footer = <p>Available Appointments on {format(selected, 'PP')}.</p>;
-    // }
     return (
         <div className='mb-28 px-12'>
             <h2 className='text-center text-secondary text-2xl pb-5 '>Available Appointments On {format(date, 'PP')}</h2>

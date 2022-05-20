@@ -22,6 +22,7 @@ const Navbar = () => {
         <li>{user ? <button onClick={logout} className="btn btn-ghost mr-10">Sign Up</button> : <Link to="/login">Login</Link>}</li>
 
     </>
+
     return (
         <div className="navbar bg-base-100 ">
             <div className="navbar-start">
@@ -41,8 +42,8 @@ const Navbar = () => {
                 <ul className="menu menu-horizontal  ">
                     {menuItems}
                 </ul>
-                <div class="avatar online mr-12">
-                    <div class="w-8 rounded-full ">
+                <div className="avatar online mr-12">
+                    <div className="w-10 rounded-full ">
                         {
                             user?.photoURL ? <img src={user?.photoURL} /> : <img src="https://api.lorem.space/image/face?hash=28212" />
                         }
