@@ -4,7 +4,6 @@ import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWith
 import { useForm } from 'react-hook-form';
 import Loading from '../Shared/Loading';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { async } from '@firebase/util';
 import { toast } from 'react-toastify';
 import useToken from '../../hooks/useToken';
 

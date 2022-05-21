@@ -4,6 +4,7 @@ const useToken = (user) => {
     useEffect(() => {
         const email = user?.user?.email;
         const currentUser = { email: email };
+        console.log(email);
         if (email) {
             fetch(`https://aqueous-fjord-98916.herokuapp.com/user/${email}`, {
                 method: "PUT",

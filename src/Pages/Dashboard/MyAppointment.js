@@ -28,7 +28,7 @@ const MyAppointment = () => {
         }
     }, [user])
     // 
-
+    console.log(appointments);
     return (
         <div>
             <h2 className='text-center text-xl text-primary mb-4'>Total Appointment {appointments?.length}</h2>
@@ -54,8 +54,12 @@ const MyAppointment = () => {
                                 <td>{a.slot}</td>
                                 <td>{a.treatment}</td>
                                 <td>
+
                                     {(a.price && !a.paid) && <Link to={`/dashboard/payment/${a._id}`}><button className='btn btn-xs btn-success'>Pay</button></Link>}
-                                    {(a.price && a.paid) && <span className='text-success'></span>}
+                                    {(a.price && a.paid) && <div>
+                                        <p><span className='text-success'>Paid</span></p>
+                                        <p><span className='text-success'>Trans Id: {a.transactionId}</span></p>
+                                    </div>}
                                 </td>
                             </tr>)
                         }
